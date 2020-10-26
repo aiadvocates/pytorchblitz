@@ -27,9 +27,6 @@ From the docs:
 torchvision.datasets.FashionMNIST(root, train=True, transform=None, target_transform=None, download=False)
 ```
 
-## Compose
-The `transforms.compose` allows us to string together different steps of transformations in a sequential order. This allows us to add an array of transforms for both the features and labels when preparing our data for training.
-
 ## Transform: Features
 
 Example:
@@ -39,6 +36,9 @@ transform=transforms.Compose([
     transforms.Lambda(lambda x: x.reshape(28*28))
 ]),
 ```
+
+### Compose
+The `transforms.compose` allows us to string together different steps of transformations in a sequential order. This allows us to add an array of transforms for both the features and labels when preparing our data for training.
 
 ### ToTensor() 
 For the feature transforms we have an array of transforms to process our image data for training. The first transform in the array is `transforms.ToTensor()` this is from class [torchvision.transforms.ToTensor](https://pytorch.org/docs/stable/torchvision/transforms.html#torchvision.transforms.ToTensor). We need to take our images and turn them into a tensor. (To learn more about Tensors check out [this]() resource.) The ToTensor() transformation is doing more than converting our image into a tensor. Its also normalizing our data for us by scaling the images to be between 0 and 1.
@@ -57,16 +57,14 @@ Example:
 ```python
 target_transform= transforms.Lambda(lambda y: torch.zeros(10, dtype=torchfloat).scatter_(dim=0, index=torchtensor(y), value=1))
 ```
-This function is taking the y input and creating a tensor of size 10 with a float datatype. Then its calling scatter to send each item to torch.zeros, according to the row, index and current item value.
+This function is taking the y input and creating a tensor of size 10 with a float datatype. Then its calling scatter ([torch.Tensor.scatter_ class](https://pytorch.org/docs/stable/tensors.html#torch.Tensor.scatter_)) to send each item to torch.zeros, according to the row, index and current item value.
+* `Dim=0` is row wise index
+* `index = torchtensor(y)` is the index of the element toscatter
+* `value = 1` is the source elemnt
 
-1. Setting a default output size of 10.
-2. Output type we want with is a float.
-3. Then we are calling scatter. 
-[torch.Tensor.scatter_ class](https://pytorch.org/docs/stable/tensors.html#torch.Tensor.scatter_)
-    * Dim=0 means row wise index
-    * index = torchtensor(y) is the index of the element to scatter
-    * value = 1 is the source elemnt
 
+# Using your own data 
+Another example? Might break down the loadding of an outside dataset vs a pytorch datatet?
 
 ## Resources
 
