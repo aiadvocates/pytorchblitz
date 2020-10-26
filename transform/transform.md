@@ -101,11 +101,20 @@ dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'val']}
 
 class_names = image_datasets['train'].classes
 ```
+Full Source for this examples:  [FoodAI](https://github.com/sethjuarez/FoodAI)<br>
 
-## Resources
+# Resources
 
 Check out the other TorchVision Transforms available: https://pytorch.org/docs/stable/torchvision/transforms.html
 
-Full Source for the above examples: <br>
-[FashionMNIST]()<br>
-[FoodAI](https://github.com/sethjuarez/FoodAI)<br>
+## More help with the FashionMNIST Pytorch Blitz
+[Tensors]()<br>
+[DataSets]()<br>
+[DataLoader]()<br>
+[Transformations]()<br>
+[Choosing Model]()<br>
+[Optimization Loop]()<br>
+[AutoGrad]()<br>
+[Back to FashionMNIST main code base]()<br>
+
+
