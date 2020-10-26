@@ -1,6 +1,4 @@
-# Transforms
-
-## What are they?
+# What are Transforms?
 
 Data does not come ready to be fed into the machine learning algorithm. We need to do different data manipulations or transforms to prepare it for training. There are many types of transformations and it depends on the type of model you are building and the state of your data as to which ones you should use. 
 
@@ -24,6 +22,11 @@ clothing = datasets.FashionMNIST('data', train=True, download=True,
 <!--TODO link to Ari' Dataset info-->
 We are using the built-in open FashionMNIST datasets from the PyTorch library. For more info on the Datasets and Loaders check out [this]() resource.
 
+From the docs:
+```
+torchvision.datasets.FashionMNIST(root, train=True, transform=None, target_transform=None, download=False)
+```
+
 ## Compose
 The `transforms.compose` allows us to string together different steps of transformations in a sequential order. This allows us to add an array of transforms for both the features and labels when preparing our data for training.
 
@@ -32,7 +35,12 @@ For the feature transforms we have an array of transforms to process our image d
 
 The second transform in the array is the `transform.Lambda` which takes a lambda function and reshapes the images to a consistent size.
 
-### Target_Transform: is for the labels
+From the docs:
+```
+transform (callable, optional) – A function/transform that takes in an PIL image and returns a transformed version. E.g, transforms.RandomCrop
+```
+
+## Target_Transform: is for the labels
 
 The function is doing quite a bit for us so lets take a look inside and see whats happening:
 
@@ -44,12 +52,7 @@ Then we are calling scatter.
 parma dim=0 means dont change index of y row
 
 From the docs:
-
 ```
-torchvision.datasets.FashionMNIST(root, train=True, transform=None, target_transform=None, download=False)
-
-transform (callable, optional) – A function/transform that takes in an PIL image and returns a transformed version. E.g, transforms.RandomCrop
-
 target_transform (callable, optional) – A function/transform that takes in the target and transforms it.
 ```
 
