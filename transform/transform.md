@@ -1,4 +1,4 @@
-# What are Transforms?
+# What are Data Transforms?
 
 Data does not come ready to be fed into the machine learning algorithm. We need to do different data manipulations or transforms to prepare it for training. There are many types of transformations and it depends on the type of model you are building and the state of your data as to which ones you should use. 
 
@@ -64,8 +64,48 @@ This function is taking the y input and creating a tensor of size 10 with a floa
 
 
 # Using your own data 
-Another example? Might break down the loadding of an outside dataset vs a pytorch datatet?
+Below is an example for processing image data using a dataset from a local directory.
+
+Example:
+
+```
+data_dir='data'
+batch_size=4
+
+# Data augmentation and normalization for training
+# Just normalization for validation
+data_transforms = {
+    'train': transforms.Compose([
+        transforms.RandomResizedCrop(224),
+        transforms.RandomHorizontalFlip(),
+        transforms.ToTensor(),
+        transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+    ]),
+    'val': transforms.Compose([
+        transforms.Resize(256),
+        transforms.CenterCrop(224),
+        transforms.ToTensor(),
+        transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+    ]),
+}
+image_datasets = {x: datasets.ImageFolder(os.path.join(data_dir, x),
+                                          data_transforms[x])
+                                          for x in ['train', 'val']}
+
+dataloaders = {x: torch.utils.data.DataLoader(image_datasets[x], 
+                                            batch_size=batch_size,
+                                            shuffle=True, num_workers=4)
+                                            for x in ['train', 'val']}
+
+dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'val']}
+
+class_names = image_datasets['train'].classes
+```
 
 ## Resources
 
 Check out the other TorchVision Transforms available: https://pytorch.org/docs/stable/torchvision/transforms.html
+
+Full Source for the above examples: <br>
+[FashionMNIST]()<br>
+[FoodAI](https://github.com/sethjuarez/FoodAI)<br>
