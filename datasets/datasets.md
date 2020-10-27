@@ -2,7 +2,7 @@
 
 ## Getting Started With Data in PyTorch
 
-Before we can even think about building a model with PyTorch, we need to first learn how to load and process data. Data comes in all sorts of forms and formats from structured tables, to image, audio, text, video files and more. 
+Before we can even think about building a model with PyTorch, we need to first learn how to load and process data. Data comes in all sorts of forms and formats from structured tables, images, audio, text, video files and more. 
 
 ![types of data](../images/typesofdata.PNG)
 
