@@ -37,7 +37,7 @@ clothing = datasets.FashionMNIST('data', train=True, download=True)
 labels_map = {0 : 'T-Shirt', 1 : 'Trouser', 2 : 'Pullover', 3 : 'Dress', 4 : 'Coat', 5 : 'Sandal', 6 : 'Shirt',
               7 : 'Sneaker', 8 : 'Bag', 9 : 'Ankle Boot'}
 figure = plt.figure(figsize=(8,8))
-cols, rows = 4, 5
+cols, rows = 3, 3
 for i in range(1, cols*rows +1):
     sample_idx = np.random.randint(len(clothing))
     img = clothing[sample_idx][0][0,:,:]
@@ -47,6 +47,8 @@ for i in range(1, cols*rows +1):
     plt.imshow(img, cmap='gray')
 plt.show()
 ```
+
+![Fashion MNIST](../images/fashion_mnist.png)
 ## Creating a Custom Dataset
 To work with your own data lets look at the a simple custom image DataSet implementation:
 
