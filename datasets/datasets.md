@@ -56,9 +56,9 @@ To work with your own data lets look at the a simple custom image DataSet implem
 import os
 import torch
 import pandas as pd
-from skimage import io, transform
 from torch.utils.data import Dataset
 from torchvision import transforms, utils
+from torchvision.io import read_image
 
 class CustomImageDataset(Dataset):
     """Custom Image PyTorch Dataset."""
@@ -85,7 +85,7 @@ class CustomImageDataset(Dataset):
 
         img_name = os.path.join(self.root_dir,
                                 self.img_labels.iloc[idx, 0])
-        image = io.imread(img_name)
+        image = read_image('path_to_image.jpeg')
         label = self.img_labels.iloc[idx, 1:]
         sample = {'image': image, 'label': label}
 
@@ -100,14 +100,14 @@ class CustomImageDataset(Dataset):
 
 ## Imports 
 
-Import os for file handling, torch for PyTorch, pandas for loading labels, skimage for image processing, and Dataset to implement the Dataset interface.
+Import os for file handling, torch for PyTorch, [pandas](https://pandas.pydata.org/) for loading labels, [torch vision](https://pytorch.org/blog/pytorch-1.7-released/) to read image files, and Dataset to implement the Dataset interface.
 
 Example:
 ```python
 import os
 import torch
 import pandas as pd
-from skimage import io
+from torchvision.io import read_image
 from torch.utils.data import Dataset
 ```
 
@@ -155,7 +155,7 @@ Example:
 
         img_name = os.path.join(self.root_dir,
                                 self.img_labels.iloc[idx, 0])
-        image = io.imread(img_name)
+        image = read_image('path_to_image.jpeg')
         label = self.img_labels.iloc[idx, 1:]
         sample = {'image': image, 'label': label}
 
