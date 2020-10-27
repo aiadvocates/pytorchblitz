@@ -19,7 +19,7 @@ A whole set of example datasets such as MNIST that implement this interface are 
 
  ## Iterating through a Dataset
 
-Once we have a Dataset we can index it manually clothing[i]. 
+Once we have a Dataset we can index it manually like a list ```clothing[index]```. 
 
 Here is an example of how to load the fashion MNIST dataset from torch vision.
 
