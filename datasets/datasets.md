@@ -96,7 +96,7 @@ class CustomImageDataset(Dataset):
         
 ```
 
-## Lets break down whats happening in this sample code function by function.
+## Lets break down whats happening in this sample implementaion of a PyTorch Dataset function by function.
 
 ## Imports 
 
