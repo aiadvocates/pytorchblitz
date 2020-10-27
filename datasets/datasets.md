@@ -7,7 +7,7 @@ Before we can even think about building a model with PyTorch, we need to first l
 ![types of data](../images/typesofdata.PNG)
 
 
-Since different model architectures can be apply to many different data types we ideally want our dataset code to be decoupled from model training code. Different data types require different python libraries to load and process such as open cv and pil for images, nltk and spacy for text and librosa for audio. Data can be sourced from local files, cloud datastores and databases code. 
+Since different model architectures can be applied to many data types, we ideally want our dataset code to be decoupled from model training code. Different data types require different python libraries to load and process such as open cv and pil for images, nltk and spacy for text and librosa for audio. Data can be sourced from local files, cloud datastores and databases code. 
 
 As such code for processing data can quickly get messy and become hard to maintain, if not properly organized. To this end PyTorch provides a simple Datasets interface for linking managing collections of data. 
 
