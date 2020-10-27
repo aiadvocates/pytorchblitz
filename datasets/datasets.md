@@ -2,15 +2,15 @@
 
 ## Getting Started With Data in PyTorch
 
-Before we can even think about building a model with PyTorch, we need to first learn how to load and process data. Data comes in all sorts of forms and formats from structured tables, images, audio, text, video files and more. 
+Before we can even think about building a model with PyTorch, we need to first learn how to load and process data. Data can be sourced from local files, cloud datastores and database queries. It comes in all sorts of forms and formats from structured tables to image, audio, text, video files and more. 
 
 ![types of data](../images/typesofdata.PNG)
 
-Different data types require different python libraries to load and process such as open cv and pil for images, nltk and spacy for text and librosa for audio. Data can be sourced from local files, cloud datastores and databases code. 
+Different data types require different python libraries to load and process such as [openCV](https://opencv.org/) and (PIL)[https://pillow.readthedocs.io/en/stable/reference/Image.html] for images, [NLTK](https://www.nltk.org/) and [spaCy](https://spacy.io/) for text and [Librosa](https://librosa.org/doc/latest/index.html) for audio. 
 
-As such, code for processing data can quickly get messy and become hard to maintain, if not properly organized. Since different model architectures can be applied to many data types, we ideally want our dataset code to be decoupled from model training code. To this end PyTorch provides a simple Datasets interface for linking managing collections of data. 
+If not properly organized, code for processing data samples can quickly get messy and become hard to maintain. Since different model architectures can be applied to many data types, we ideally want our dataset code to be decoupled from our model training code. To this end, PyTorch provides a simple Datasets interface for linking managing collections of data. 
 
-A whole set of example datasets such as MNIST that implement this interface are built into PyTorch extension libraries. These are useful for benchmarking and testing your models before training on your own custom datasets.
+A whole set of example datasets such as Fashion MNIST that implement this interface are built into PyTorch extension libraries. These are useful for benchmarking and testing your models before training on your own custom datasets.
 
  You can find some of them below. 
  - [Image Datasets](https://pytorch.org/docs/stable/torchvision/datasets.html)
@@ -49,7 +49,7 @@ plt.show()
 
 ![Fashion MNIST](../images/fashion_mnist.png)
 ## Creating a Custom Dataset
-To work with your own data lets look at the a simple custom image DataSet implementation:
+To work with your own data lets look at the a simple custom image Dataset implementation:
 
 ```python
 import os
@@ -166,14 +166,14 @@ Example:
 
 ## Preparing your data for training with DataLoaders
 
-Now we have a organized mechansim for managing data which is great but there is still a lot of manual work we would have to do train a model. 
+Now we have a organized mechansim for managing data which is great, but there is still a lot of manual work we would have to do train a model with our Dataset. 
 
-For example if we wanted to train a model with our dataset we would have to manually maintain the code for 
-- Data batching 
-- Suffling data 
-- Distributing sata across multiple parallel processes and GPUs
+For example we would have to manually maintain the code for: 
+- Batching 
+- Suffling 
+- Parallel batch distribution 
 
-The PyTorch Dataloader ```torch.utils.data.DataLoader``` is an iterator that handles all of this complexity for us enabling us to load a dataset and train our model
+The PyTorch Dataloader ```torch.utils.data.DataLoader``` is an iterator that handles all of this complexity for us enabling us to load a dataset and focusing on train our model.
 
 
 ```python
