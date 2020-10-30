@@ -109,8 +109,7 @@ Check out the other TorchVision Transforms available: https://pytorch.org/docs/s
 
 ## More help with the FashionMNIST Pytorch Blitz
 [Tensors]()<br>
-[DataSets]()<br>
-[DataLoader]()<br>
+[DataSets and DataLoaders]()<br>
 [Transformations]()<br>
 [Choosing Model]()<br>
 [Optimization Loop]()<br>
