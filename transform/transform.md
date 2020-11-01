@@ -4,7 +4,7 @@ Data does not come ready to be processed in the machine learning algorithm. We n
 
 In the below example, for our FashionMNIT image dataset, we are taking our image features (x), turning it into a tensor and normalizing it. Then taking the labels (y) padding with zeros to get a consistent shape. We will break down each of these steps and the why below.
 
-Example:
+Full Section Example:
 
 ```python
 # image classes
@@ -114,10 +114,10 @@ Check out the other TorchVision Transforms available: https://pytorch.org/docs/s
 ## More help with the FashionMNIST Pytorch Blitz
 [Tensors]()<br>
 [DataSets and DataLoaders]()<br>
-[Transformations]()me<br>
-[Choosing Model]()me<br>
+[Transformations]()<br>
+[Choosing Model]()<br>
 [Optimization Loop and AutoGrad]()<br>
-[Save, Load and Use Model]()me<br>
+[Save, Load and Use Model]()<br>
 [Back to FashionMNIST main code base]()<br>
 
 

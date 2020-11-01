@@ -4,7 +4,7 @@ Now that the data has been loaded and transformed we can now build the model. Th
 
 In the below example, for our FashionMNIT image dataset, we are using a `Sequential` conntainer from class [torch.nn.Sequential](https://pytorch.org/docs/stable/generated/torch.nn.Sequential.html). Modules will be added to it in the order they are passed in. We will break down each of these steps and the why below.
 
-Example:
+Full Section Example:
 
 ```python
 # where to run
@@ -70,8 +70,8 @@ optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 ## More help with the FashionMNIST Pytorch Blitz
 [Tensors]()<br>
 [DataSets and DataLoaders]()<br>
-[Transformations]()me<br>
-[Choosing Model]()me<br>
+[Transformations]()<br>
+[Choosing Model]()<br>
 [Optimization Loop and AutoGrad]()<br>
-[Save, Load and Use Model]()me<br>
+[Save, Load and Use Model]()<br>
 [Back to FashionMNIST main code base]()<br>
