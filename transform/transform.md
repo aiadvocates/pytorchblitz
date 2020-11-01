@@ -1,18 +1,30 @@
 # What are Data Transforms?
 
-Data does not come ready to be fed into the machine learning algorithm. We need to do different data manipulations or transforms to prepare it for training. There are many types of transformations and it depends on the type of model you are building and the state of your data as to which ones you should use. 
+Data does not come ready to be processed in the machine learning algorithm. We need to do different data manipulations or transforms to prepare it for training. There are many types of transformations and it depends on the type of model you are building and the state of your data as to which ones you should use. 
 
-In the below example, for our FashionMNIT image dataset, we are taking our image features (x), turning it into a tensor, normalizing and reshaping it. Then taking the labels (y) padding with zeros to get a consistent shape. We will break down each of these steps and the why below.
+In the below example, for our FashionMNIT image dataset, we are taking our image features (x), turning it into a tensor and normalizing it. Then taking the labels (y) padding with zeros to get a consistent shape. We will break down each of these steps and the why below.
 
 Example:
 
 ```python
-clothing = datasets.FashionMNIST('data', train=True, download=True,
-                        transform=transforms.Compose([
-                            transforms.ToTensor(),
-                            transforms.Lambda(lambda x: x.reshape(28*28))
-                        ]),
-                        target_transform= transforms.Lambda(lambda y: torch.zeros(10, dtype=torch.float).scatter_(dim=0, index=torch.tensor(y), value=1))
+# image classes
+classes = ["T-shirt/top", "Trouser", "Pullover", "Dress", "Coat", "Sandal", "Shirt", "Sneaker", "Bag", "Ankle boot"]
+
+# data used for training
+training_data = datasets.FashionMNIST('data', train=True, download=True,
+                        transform=transforms.Compose([transforms.ToTensor()]),
+                        target_transform=transforms.Compose([
+                            transforms.Lambda(lambda y: torch.zeros(10, dtype=torch.float).scatter_(0, torch.tensor(y), value=1))
+                        ])
+                     )
+
+# data used for testing
+test_data = datasets.FashionMNIST('data', train=False, download=True,
+                        transform=transforms.Compose([transforms.ToTensor()]),
+                        target_transform=transforms.Compose([
+                            transforms.Lambda(lambda y: torch.zeros(10, dtype=torch.float).scatter_(0, torch.tensor(y), value=1))
+                        ])
+                     )
 )
 ```
 
@@ -20,7 +32,7 @@ clothing = datasets.FashionMNIST('data', train=True, download=True,
 
 ## Pytorch Datasets
 <!--TODO link to Ari' Dataset info-->
-We are using the built-in open FashionMNIST datasets from the PyTorch library. For more info on the Datasets and Loaders check out [this]() resource.
+We are using the built-in open FashionMNIST datasets from the PyTorch library. For more info on the Datasets and Loaders check out [this]() resource. The `Train=True`indicates we want to download the training dataset from the built-in datasets, `Train=False` indicates to download the testing dataset. This way we have data partitioned out for training and testing within the provided PyTorch datasets. We will apply the same transfoms to both the training and testing datasets.
 
 From the docs:
 ```
@@ -31,10 +43,7 @@ torchvision.datasets.FashionMNIST(root, train=True, transform=None, target_trans
 
 Example:
 ```python
-transform=transforms.Compose([
-    transforms.ToTensor(),
-    transforms.Lambda(lambda x: x.reshape(28*28))
-]),
+transform=transforms.Compose([transforms.ToTensor()])
 ```
 
 ### Compose
@@ -46,11 +55,6 @@ For the feature transforms we have an array of transforms to process our image d
 ```
 NOTE: ToTensor only normalized image data that is in PIL mode of (L, LA, P, I, F, RGB, YCbCr, RGBA, CMYK, 1) or if the numpy.ndarray has dtype = np.uint8. In the other cases, tensors are returned without scaling.
 ```
-
-
-### Lambda: Reshape
-
-The second transform in the array is the `transform.Lambda` which applys a user-defined lambda as a transform. The lambda function we created uses numpy to reshape the images from the 28 x 28 pixel grayscale arrays and flatten them so it becomes a row of 784 pixels of numbers for each image. 
 
 ## Target_Transform: Labels
 Example:
@@ -110,10 +114,10 @@ Check out the other TorchVision Transforms available: https://pytorch.org/docs/s
 ## More help with the FashionMNIST Pytorch Blitz
 [Tensors]()<br>
 [DataSets and DataLoaders]()<br>
-[Transformations]()<br>
-[Choosing Model]()<br>
-[Optimization Loop]()<br>
-[AutoGrad]()<br>
+[Transformations]()me<br>
+[Choosing Model]()me<br>
+[Optimization Loop and AutoGrad]()<br>
+[Save, Load and Use Model]()me<br>
 [Back to FashionMNIST main code base]()<br>
 
 
