@@ -1,6 +1,6 @@
 # Save, Load and Use the Model
 
-We have trained the model! Now lets take a look at the way we can save, load and use the model we created. We have trained the model! Now lets take a look at the way we can save, load and use the model we created. 
+We have trained the model! Now lets take a look at how to save, load and use the model created.
 
 Full Section Example:
 ```python
@@ -82,7 +82,7 @@ with torch.no_grad():
 [Tensors]()<br>
 [DataSets and DataLoaders]()<br>
 [Transformations]()<br>
-[Choosing Model]()<br>
+[Building the Model]()<br>
 [Optimization Loop and AutoGrad]()<br>
 [Save, Load and Use Model]()<br>
 [Back to FashionMNIST main code base]()<br>

@@ -115,7 +115,7 @@ Check out the other TorchVision Transforms available: https://pytorch.org/docs/s
 [Tensors]()<br>
 [DataSets and DataLoaders]()<br>
 [Transformations]()<br>
-[Choosing Model]()<br>
+[Building the Model]()<br>
 [Optimization Loop and AutoGrad]()<br>
 [Save, Load and Use Model]()<br>
 [Back to FashionMNIST main code base]()<br>

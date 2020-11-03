@@ -42,7 +42,7 @@ print('Using {} device'.format(device))
 
 # The Model Modules in nn.Seqential
 
-Lets break down each model layer in our FashionMNIST model example.
+Lets break down each model layer in the FashionMNIST model.
 
 Example:
 ```python
@@ -101,7 +101,7 @@ Output: torch.Size([1, 784])
 
 ## [nn.Linear](https://pytorch.org/docs/stable/generated/torch.nn.Linear.html) to add a linear layer to the model.
 
-Now that we have flattened our tensor dimension we will apply a linear layer transform that will calculate the xb and learn the bias.
+Now that we have flattened our tensor dimension we will apply a linear layer transform that will calculate/learn the weights and the bias.
 
 From the docs:
 ```
@@ -114,40 +114,35 @@ out_features – size of each output sample
 bias – If set to False, the layer will not learn an additive bias. Default: True
 ```
 
-Lets take a look at the resulting data example with just the flatten layer and linear layer added:
+Lets take a look at the resulting data example with the flatten layer and linear layer added:
 
 ```python
 input = training_data[0][0]
 print(input.size())
-m = nn.Sequential(
+model = nn.Sequential(
     nn.Flatten(),    
     nn.Linear(28*28, 512),
 )
-output = m(input)
+output = model(input)
 output.size()
 
 Output: 
 torch.Size([1, 28, 28])
 torch.Size([1, 512])
 ```
-
-
-## [nn.ReLU](https://pytorch.org/docs/stable/generated/torch.nn.ReLU.html)
-Applies the rectified linear unit function element-wise
-
-## [nn.Softmax]()
-
-
-# Cost Function and Paramters
-Example:
+To print out learned weights and bias:
 ```python
-# cost function used to determine best parameters
-cost = torch.nn.BCELoss()
-
-# used to create optimal parameters
-learning_rate = 1e-3
-optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+model[1].weight
+model[1].bias
 ```
+
+## [nn.ReLU](https://pytorch.org/docs/stable/generated/torch.nn.ReLU.html) Activation
+"Applies the rectified linear unit function element-wise"
+
+## [nn.Softmax]() Activation
+"Applies the Softmax function to an n-dimensional input Tensor rescaling them so that the elements of the n-dimensional output Tensor lie in the range [0,1] and sum to 1."
+
+
 # Resources
 
 [torch.nn](https://pytorch.org/docs/stable/nn.html)
@@ -156,7 +151,7 @@ optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 [Tensors]()<br>
 [DataSets and DataLoaders]()<br>
 [Transformations]()<br>
-[Choosing Model]()<br>
+[Building the Model]()<br>
 [Optimization Loop and AutoGrad]()<br>
 [Save, Load and Use Model]()<br>
 [Back to FashionMNIST main code base]()<br>
