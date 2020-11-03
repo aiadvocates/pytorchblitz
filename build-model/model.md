@@ -23,13 +23,6 @@ model = nn.Sequential(
     ).to(device)
     
 print(model)
-
-# cost function used to determine best parameters
-cost = torch.nn.BCELoss()
-
-# used to create optimal parameters
-learning_rate = 1e-3
-optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 ```
 # Get Device for Training
 Here we check to see if [torch.cuda](https://pytorch.org/docs/stable/notes/cuda.html) is available to use the GPU, else we will use the CPU. 
@@ -142,6 +135,20 @@ model[1].bias
 ## [nn.Softmax]() Activation
 "Applies the Softmax function to an n-dimensional input Tensor rescaling them so that the elements of the n-dimensional output Tensor lie in the range [0,1] and sum to 1."
 
+```python
+Output:
+
+Using cuda device
+Sequential(
+  (0): Flatten()
+  (1): Linear(in_features=784, out_features=512, bias=True)
+  (2): ReLU()
+  (3): Linear(in_features=512, out_features=512, bias=True)
+  (4): ReLU()
+  (5): Linear(in_features=512, out_features=10, bias=True)
+  (6): Softmax(dim=1)
+)
+```
 
 # Resources
 
