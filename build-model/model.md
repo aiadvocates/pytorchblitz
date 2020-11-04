@@ -2,12 +2,13 @@
 
 The data has been loaded and transformed we can now build the model. We will leverage [torch.nn](https://pytorch.org/docs/stable/nn.html) predefined layers that Pytorch has that can both simplify our code, and  make it faster.
 
-In the below example, for our FashionMNIT image dataset, we are using a `Sequential` container from class [torch.nn.Sequential](https://pytorch.org/docs/stable/generated/torch.nn.Sequential.html). The neural network modules layers will be added to it in the order they are passed in. We will break down each of these step below.
+In the below example, for our FashionMNIT image dataset, we are using a `Sequential` container from class [torch.nn.Sequential](https://pytorch.org/docs/stable/generated/torch.nn.Sequential.html) that allows us to define the model layers inline. The neural network modules layers will be added to it in the order they are passed in.
 
-Full Section Example:
+Another way this model could be bulid is with a class using [nn.Module](https://pytorch.org/docs/stable/generated/torch.nn.Module.html). We will break down each of these step below.
+
+Inline Example:
 
 ```python
-# where to run
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 print('Using {} device'.format(device))
 
@@ -24,6 +25,23 @@ model = nn.Sequential(
     
 print(model)
 ```
+
+Class nn.Module Example:
+```python
+class NeuralNework(nn.Module):
+    def __init__(self, x, y):
+        super(NeuralNework, self).__init__()
+        self.linear1 = nn.Linear(28*28, 512)
+        self.linear2  = nn.Linear(512, 512)        
+        self.linear3  = nn.Linear(512, 10)
+
+    def forward(self, x):
+        x = F.relu(self.linear1(x))
+        x = F.relu(self.linear2(x))
+        x = F.relu(self.linear3(x))
+        x = self.output(x)
+        return F.softmax(x, dim=1)
+```
 # Get Device for Training
 Here we check to see if [torch.cuda](https://pytorch.org/docs/stable/notes/cuda.html) is available to use the GPU, else we will use the CPU. 
 
@@ -33,24 +51,9 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 print('Using {} device'.format(device))
 ```
 
-# The Model Modules in nn.Seqential
+# The Inline Model Modules in nn.Seqential
 
 Lets break down each model layer in the FashionMNIST model.
-
-Example:
-```python
-model = nn.Sequential(
-        nn.Flatten(),
-        nn.Linear(28*28, 512),
-        nn.ReLU(),
-        nn.Linear(512, 512),
-        nn.ReLU(),
-        nn.Linear(512, len(classes)),
-        nn.Softmax(dim=1)
-    ).to(device)
-    
-print(model)
-```
 
 ## [nn.Flatten](https://pytorch.org/docs/stable/generated/torch.nn.Flatten.html) to reduce tensor dimensions to one.
 From the docs:
@@ -149,6 +152,8 @@ Sequential(
   (6): Softmax(dim=1)
 )
 ```
+# The Class Model
+
 
 # Resources
 

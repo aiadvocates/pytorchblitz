@@ -15,6 +15,7 @@ print('Saved PyTorch Model to model.pth')
 
 draw_clothes(test_data)
 
+#rehydrate model
 loaded_model = nn.Sequential(
         nn.Flatten(),
         nn.Linear(28*28, 512),
@@ -24,6 +25,8 @@ loaded_model = nn.Sequential(
         nn.Linear(512, len(classes)),
         nn.Softmax(dim=1)
     )
+
+#load graph
 loaded_model.load_state_dict(torch.load('model.pth'))
 loaded_model.eval()
 
