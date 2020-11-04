@@ -152,9 +152,6 @@ Sequential(
   (6): Softmax(dim=1)
 )
 ```
-# The Class Model
-
-
 # Resources
 
 [torch.nn](https://pytorch.org/docs/stable/nn.html)
