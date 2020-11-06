@@ -6,7 +6,7 @@ In the below example, for our FashionMNIT image dataset, we are using a `Sequent
 
 Another way this model could be bulid is with a class using [nn.Module](https://pytorch.org/docs/stable/generated/torch.nn.Module.html). We will break down each of these step of the model below.
 
-Inline Example:
+Inline nn.Sequential Example:
 
 ```python
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
@@ -50,7 +50,7 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 print('Using {} device'.format(device))
 ```
 
-# The Model Modules
+# The Model Module Layers
 
 Lets break down each model layer in the FashionMNIST model.
 
@@ -77,22 +77,6 @@ flattened_tensor.size()
 
 Output: torch.Size([1, 784])
 ```
-
-Flatten can also be done with a reshape as shown here:
-
-```python
-tensor = training_data[0][0]
-print(tensor.size())
-
-Output: torch.Size([1, 28, 28])
-```
-```python
-tensor.reshape(-1)
-print(tensor.size())
-
-Output: torch.Size([1, 784])
-```
-
 
 ## [nn.Linear](https://pytorch.org/docs/stable/generated/torch.nn.Linear.html) to add a linear layer to the model.
 
@@ -131,26 +115,15 @@ model[1].weight
 model[1].bias
 ```
 
-## [nn.ReLU](https://pytorch.org/docs/stable/generated/torch.nn.ReLU.html) Activation
+## Activation Functions
+- [nn.ReLU](https://pytorch.org/docs/stable/generated/torch.nn.ReLU.html) Activation:
 "Applies the rectified linear unit function element-wise"
-
-## [nn.Softmax]() Activation
+- [nn.Softmax]() Activation:
 "Applies the Softmax function to an n-dimensional input Tensor rescaling them so that the elements of the n-dimensional output Tensor lie in the range [0,1] and sum to 1."
 
-```python
-Output:
 
-Using cuda device
-Sequential(
-  (0): Flatten()
-  (1): Linear(in_features=784, out_features=512, bias=True)
-  (2): ReLU()
-  (3): Linear(in_features=512, out_features=512, bias=True)
-  (4): ReLU()
-  (5): Linear(in_features=512, out_features=10, bias=True)
-  (6): Softmax(dim=1)
-)
-```
+
+
 # Resources
 
 [torch.nn](https://pytorch.org/docs/stable/nn.html)
