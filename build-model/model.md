@@ -4,7 +4,7 @@ The data has been loaded and transformed we can now build the model. We will lev
 
 In the below example, for our FashionMNIT image dataset, we are using a `Sequential` container from class [torch.nn.Sequential](https://pytorch.org/docs/stable/generated/torch.nn.Sequential.html) that allows us to define the model layers inline. The neural network modules layers will be added to it in the order they are passed in.
 
-Another way this model could be bulid is with a class using [nn.Module](https://pytorch.org/docs/stable/generated/torch.nn.Module.html). We will break down each of these step below.
+Another way this model could be bulid is with a class using [nn.Module](https://pytorch.org/docs/stable/generated/torch.nn.Module.html). We will break down each of these step of the model below.
 
 Inline Example:
 
@@ -28,17 +28,16 @@ print(model)
 
 Class nn.Module Example:
 ```python
-class NeuralNework(nn.Module):
-    def __init__(self, x, y):
-        super(NeuralNework, self).__init__()
-        self.linear1 = nn.Linear(28*28, 512)
-        self.linear2  = nn.Linear(512, 512)        
-        self.linear3  = nn.Linear(512, 10)
+class Model(nn.Module):
+    def __init__(self, x):
+        super(Model, self).__init__()
+        self.layer1 = nn.Linear(28*28, 512)
+        self.layer2 = nn.Linear(512, 512)
+        self.output = nn.Linear(512, 10)
 
     def forward(self, x):
-        x = F.relu(self.linear1(x))
-        x = F.relu(self.linear2(x))
-        x = F.relu(self.linear3(x))
+        x = F.relu(self.layer1(x))
+        x = F.relu(self.layer2(x))
         x = self.output(x)
         return F.softmax(x, dim=1)
 ```
@@ -51,7 +50,7 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 print('Using {} device'.format(device))
 ```
 
-# The Inline Model Modules in nn.Seqential
+# The Model Modules
 
 Lets break down each model layer in the FashionMNIST model.
 
