@@ -104,9 +104,9 @@ PyTorch uses this graph to automatically update parameters with respect to our m
 The standard method for optimization is called Stochastic Gradient Descent, to learn more check out this awesome video by [3blue1brown](https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi). 
 
 There are many different optimizers and variations of this method in PyTorch such as ADAM and RMSProp that work better for different kinds of models. 
-They are outside the scope of this Blitz, but can check out the full list of optimizers[here](https://pytorch.org/docs/stable/optim.html) 
+They are outside the scope of this Blitz, but can check out the full list of optimizers [here](https://pytorch.org/docs/stable/optim.html).
 
-## Putting it all together lets look at a basic optimization loop
+## Putting it all together lets look at a basic Optimization Loop
 
 ```python
 
