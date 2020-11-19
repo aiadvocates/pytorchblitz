@@ -1,17 +1,41 @@
-# Optimizing Model Parameters¶
+# Optimizing Model Parameters
 
 Now that we have a model and data it's time to train, validate and test our model by optimizating it's paramerters on our data! 
 
-To do this we need to understand a how to handle 5 core deep learning concepts in PyTorch
+```python
+# Initilize hyper parameters
+learning_rate = 0.01
+num_epochs = 100
+batch_size = 24
+
+
+# Initilize model, optimizer and example cost function
+model = NeuralNework() # From Previous Model Section
+optimizer = optim.SGD(model.parameters(), lr=learning_rate)
+
+# For loop to iterate over epoch
+for epoch in range(num_epochs)
+    # Train loop over batches 
+        # Set model to train mode
+        # Calculate loss using 
+        # clear optimizer gradient
+        # loss.backword
+        # optimizer step
+        # Set model to evaluate mode and start validation loop
+        #calculate validation loss and update optimizer hyper parameters
+    # Set model to evaluate test loop
+```
+
+To understand this code need to understand a how to handle 4 core deep learning concepts in PyTorch
+
 1. Hyperparameters (learning rates, batch sizes, epochs etc)
 2. Optimization Loops
 3. Loss
-4. AutoGrad
-5. Optimizers 
+4. Optimizers 
 
-Let's dissect these concepts one by one and look at some code at the end we'll see how it all fits together.
+Let's dissect these core concepts one by one by the time we end every line the code above will make sense.
 
-## Hyperparameters 
+## 1. Hyperparameters 
 
 Hyperparameters are adjustable parameters that let you control the model optimization process. 
 
@@ -28,7 +52,7 @@ For example, with neural networks, you can configure:
     epochs = 5
 ```
 
-## Optimizaton Loops
+## 2. Optimizaton Loops
 
 Once we set our hyperparameters we can then train and optimize our model with optimization loop.
 
@@ -52,7 +76,7 @@ Each iteration of the optimziation loop is called an Epoch. Each epoch is compri
              # - Put sample test metric logging and hyperparameter update code here 
  ```
 
-## Loss 
+## 3. Loss and Cost Function
 The loss is the value used to update our parameters. To calculate the loss we make a prediction using the inputs of our given data sample. 
 
 ```python
@@ -87,11 +111,11 @@ It can then be called just like out of the box implementation above
 ```
 A more in depth explanation of PyTorch cost functions is outside the scope of the blitz but you can learn more about the different common cost functions for deep learning in the PyTorch [documentation](https://pytorch.org/docs/stable/nn.html#loss-functions). 
 
-## AutoGrad and Optimizer 
+## 4. Optimizer 
 
 Using the loss we can then optimize our models parameters. By default each tensor maintains a graph of every operation applied on it unless otherwise specified using the torch.no_grad() command. 
 
-![Autograd graph](https://discuss.pytorch.org/uploads/default/original/1X/c7e0a44b7bcebfb41315b56f8418ce37f0adbfeb.png)
+![tensor graph](https://discuss.pytorch.org/uploads/default/original/1X/c7e0a44b7bcebfb41315b56f8418ce37f0adbfeb.png)
 
 PyTorch uses this graph to automatically update parameters with respect to our model's loss during training. This is done with one line loss.backwards(). Once we have our gradients the optimizer is used to propgate the gradients from the backwards command to update all the parameters in our model. 
 
@@ -103,25 +127,32 @@ PyTorch uses this graph to automatically update parameters with respect to our m
 
 The standard method for optimization is called Stochastic Gradient Descent, to learn more check out this awesome video by [3blue1brown](https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi). 
 
-There are many different optimizers and variations of this method in PyTorch such as ADAM and RMSProp that work better for different kinds of models. 
-They are outside the scope of this Blitz, but can check out the full list of optimizers [here](https://pytorch.org/docs/stable/optim.html).
-
-## Putting it all together lets look at a basic Optimization Loop
+An Optimizer in can be initalized as with the Pytorch optim module for example lets initialize an SGD optimizer it takes our model and our learning rate hyperparameter as input.
 
 ```python
+ optimizer = optim.SGD(model.parameters(), lr=learning_rate)
+```
 
-#initilize optimizer and example cost function
+In addition to SDG there are many different optimizers and variations of this method in PyTorch such as ADAM and RMSProp that work better for different kinds of models. 
+They are outside the scope of this Blitz, but can check out the full list of optimizers [here](https://pytorch.org/docs/stable/optim.html).
 
-# For loop to iterate over epoch
-    # Train loop over batches 
-        # Set model to train mode
-        # Calculate loss using 
-        # clear optimizer gradient
-        # loss.backword
-        # optimizer step
-        # Set model to evaluate mode and start validation loop
-        #calculate validation loss and update optimizer hyper parameters
-    # Set model to evaluate test loop
+## Putting It all Together 
+```python
+
+
+
+
+model = SimpleLinear().to(device)
+#model = NeuralNework().to(device)
+#model = CNN().to(device)
+print(model)
+
+# cost function used to determine best parameters
+cost = torch.nn.BCELoss()
+
+# used to create optimal parameters
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+
 
 ```
 
