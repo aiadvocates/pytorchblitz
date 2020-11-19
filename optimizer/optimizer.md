@@ -22,7 +22,8 @@ for epoch in range(num_epochs):
         pred = model(train_inputs) # make a prediction on this batch!
         loss = cost_function(pred, train_labels) # how bad is it?
         loss.backward() # compute gradients
-        optimizer.step() # update parameters    
+        optimizer.step() # update parameters   
+        
         # validation loop
         model.eval() # Set model to evaluate mode and start validation loop
         for val_batch, (val_inputs, val_labels) in enumerate(val_dataloader):
@@ -36,7 +37,7 @@ for epoch in range(num_epochs):
         print('acc: {:>0.1f}%, avg loss: {:>8f}'.format(100*correct, val_loss))
         # Make any additonal hyperparameter modifications here
         
-    # Set model to evaluate test loop
+    # Test loop
     for test_batch, (test_inputs, test_labels) in enumerate(test_dataloader):
         test_inputs, test_labels = test_inputs.to(device), test_labels.to(device)
         pred = model(test_inputs)
