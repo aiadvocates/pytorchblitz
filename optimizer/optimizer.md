@@ -6,24 +6,46 @@ Now that we have a model and data it's time to train, validate and test our mode
 # Initilize hyper parameters
 learning_rate = 0.01
 num_epochs = 100
-batch_size = 24
-
 
 # Initilize model, optimizer and example cost function
 model = NeuralNework() # From Previous Model Section
-optimizer = optim.SGD(model.parameters(), lr=learning_rate)
+optimizer = optim.SGD(model.parameters(), lr=learning_rate) # optimizer 
+cost_function = nn.CrossEntropyLoss()
 
 # For loop to iterate over epoch
-for epoch in range(num_epochs)
+for epoch in range(num_epochs):
     # Train loop over batches 
-        # Set model to train mode
-        # Calculate loss using 
-        # clear optimizer gradient
-        # loss.backword
-        # optimizer step
-        # Set model to evaluate mode and start validation loop
-        #calculate validation loss and update optimizer hyper parameters
+    for train_batch, (train_inputs, train_labels) in enumerate(train_dataloader):
+        model.train() # Set model to train mode
+        train_inputs, train_labels = train_inputs.to(device), train_labels.to(device) 
+        optimizer.zero_grad() # zero out gradient
+        pred = model(train_inputs) # make a prediction on this batch!
+        loss = cost_function(pred, train_labels) # how bad is it?
+        loss.backward() # compute gradients
+        optimizer.step() # update parameters    
+        # validation loop
+        model.eval() # Set model to evaluate mode and start validation loop
+        for val_batch, (val_inputs, val_labels) in enumerate(val_dataloader):
+            val_inputs, val_labels = val_inputs.to(device), val_labels.to(device)
+            pred = model(val_inputs)
+            test_loss += cost_function(pred, val_labels).item()
+            correct += (pred.argmax(1) == val_labels.argmax(1)).type(torch.float).sum().item()
+        val_loss /= len(val_dataloader.dataset)
+        correct /= len(val_dataloader.dataset)
+        print('\nValidation Error:')
+        print('acc: {:>0.1f}%, avg loss: {:>8f}'.format(100*correct, val_loss))
+        # Make any additonal hyperparameter modifications here
+        
     # Set model to evaluate test loop
+    for test_batch, (test_inputs, test_labels) in enumerate(test_dataloader):
+        test_inputs, test_labels = test_inputs.to(device), test_labels.to(device)
+        pred = model(test_inputs)
+        test_loss += cost_function(pred, test_labels).item()
+        correct += (pred.argmax(1) == test_labels.argmax(1)).type(torch.float).sum().item()
+    test_loss /= len(test_dataloader.dataset)
+    correct /= len(test_dataloader.dataset)
+    print('\nTest Error:')
+    print('acc: {:>0.1f}%, avg loss: {:>8f}'.format(100*correct, test_loss))
 ```
 
 To understand this code need to understand a how to handle 4 core deep learning concepts in PyTorch
@@ -43,7 +65,6 @@ For example, with neural networks, you can configure:
 
  - **Number of Epochs**- the number times iterate over the dataset to update model parameters
  - **Batch Size** - the number of samples in the dataset to evaluate before you update model parameters
- - **Cost Function** - the method used to decide how to evaluate the model on a data sample to update the model parameters
  - **Learning Rate** - how much to update models parameters at each batch/epoch set this to large and you won't update optimally if you set it to small you will learn really slowly 
  
 ```python
@@ -83,7 +104,6 @@ The loss is the value used to update our parameters. To calculate the loss we ma
     preds = model(inputs)
     loss = cost_function(preds, labels)
 ```
-
 
 Common loss functions include [Mean Square Error](https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss), [Negative Log Likelihood](https://pytorch.org/docs/stable/generated/torch.nn.NLLLoss.html#torch.nn.NLLLoss), and [CrossEntropyLoss](https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html#torch.nn.CrossEntropyLoss). Here is an example built in Cross Entropy Loss cost function call from the PyTorch nn module.
 
@@ -136,24 +156,5 @@ An Optimizer in can be initalized as with the Pytorch optim module for example l
 In addition to SDG there are many different optimizers and variations of this method in PyTorch such as ADAM and RMSProp that work better for different kinds of models. 
 They are outside the scope of this Blitz, but can check out the full list of optimizers [here](https://pytorch.org/docs/stable/optim.html).
 
-## Putting It all Together 
-```python
+With this we have all we need to know to train, validate and test PyTorch deep learning models.
 
-
-
-
-model = SimpleLinear().to(device)
-#model = NeuralNework().to(device)
-#model = CNN().to(device)
-print(model)
-
-# cost function used to determine best parameters
-cost = torch.nn.BCELoss()
-
-# used to create optimal parameters
-optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
-
-
-```
-
-Walk through key parts of code here 
