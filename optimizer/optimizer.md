@@ -94,10 +94,10 @@ Each iteration of the optimziation loop is called an Epoch. Each epoch is compri
             # Model Update Code
             model.eval() # After exiting batch loop set model to eval to speed up evaluation and not track gradients (this is explained below) 
             # Validation Loop
-            # - Put sample validation metric logging and hyperparameter update code here 
+            # - Validation metric logging and hyperparameter update happens here  
         # After exiting train loop set model to eval to speed up evaluation and not track gradients (this is explained below) 
         # Test Loop
-             # - Put sample test metric logging and hyperparameter update code here 
+             # - Test preformance happens here 
  ```
 
 ## 3. Loss and Cost Function
