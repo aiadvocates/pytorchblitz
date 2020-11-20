@@ -68,7 +68,7 @@ For example, with neural networks, you can configure:
 
  - **Number of Epochs**- the number times iterate over the dataset to update model parameters
  - **Batch Size** - the number of samples in the dataset to evaluate before you update model parameters
- - **Learning Rate** - how much to update models parameters at each batch/epoch set this to large and you won't update optimally if you set it to small you will learn really slowly 
+ - **Learning Rate** - how much to update models parameters at each batch/epoch. Set this value too large and your model won't learn optimally if you set it too small and it will learn really slowly.
  
 ```python
     learning_rate = 1e-3
@@ -78,7 +78,7 @@ For example, with neural networks, you can configure:
 
 ## 2. Optimizaton Loops
 
-Once we set our hyperparameters we can then train and optimize our model with an optimization loop.
+Once we set our hyperparameters, we can then train and optimize our model with an optimization loop.
 
 Each iteration of the optimziation loop is called an Epoch. Each epoch is comprized of three main subloops in PyTorch. 
 ![](../images/optimization_loops.PNG)
@@ -101,7 +101,7 @@ Each iteration of the optimziation loop is called an Epoch. Each epoch is compri
  ```
 
 ## 3. Loss and Cost Function
-The loss is the value used to update our parameters. To calculate the loss we make a prediction using the inputs of our given data sample. 
+The loss is the value used to update our parameters. To calculate the loss we make a prediction using the inputs of our given data sample and compare it with a cost function against the true data label value. 
 
 ```python
     preds = model(inputs)
@@ -117,7 +117,7 @@ Common loss functions include [Mean Square Error](https://pytorch.org/docs/stabl
 
 In addition to the included PyTorch cost functions you can create your own custom cost functions as long as they are differentiable. 
 
-See this example custom Cross Entropy Loss implementation from the [Stanford CS230](https://cs230.stanford.edu/blog/pytorch/#loss-function) course below
+See this example custom Cross Entropy Loss implementation from the [Stanford CS230](https://cs230.stanford.edu/blog/pytorch/#loss-function) course below.
 
 ```python
  def myCrossEntropyLoss(outputs, labels):
@@ -127,7 +127,7 @@ See this example custom Cross Entropy Loss implementation from the [Stanford CS2
     return -torch.sum(outputs)/num_examples
 
 ```
-It can then be called just like out of the box implementation above.
+It can be called just like the out of the box implementation above.
 
 ```python
  loss = myCrossEntropyLoss(model_prediction, true_value)
@@ -136,7 +136,7 @@ A more in depth explanation of PyTorch cost functions is outside the scope of th
 
 ## 4. Optimizer 
 
-Using the loss we can then optimize our models parameters. By default, each tensor maintains a graph of every operation applied on it unless otherwise specified using the torch.no_grad() command. 
+Using the loss, we can then optimize our models parameters. By default, each tensor maintains a graph of every operation applied on it unless otherwise specified using the torch.no_grad() command. 
 
 ![tensor graph](https://discuss.pytorch.org/uploads/default/original/1X/c7e0a44b7bcebfb41315b56f8418ce37f0adbfeb.png)
 
